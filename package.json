@@ -1,0 +1,11 @@
+{
+  "name": "oql-parser",
+  "version": "1.0.0",
+  "description": "OQL (Object Query Language) Parser Implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "jjdonov",
+  "license": "MIT"
+}
