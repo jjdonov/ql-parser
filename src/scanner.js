@@ -51,14 +51,8 @@ module.exports = class Scanner {
 
     //adding tokens
     const identifier = () => {
-      while(isAlphaNumeric(peek())) {
+      while(isAlphaNumeric(peek()) || peek() === '.') {
         advance();
-      }
-      if(peek() === '.' && isAlphaNumeric(peek(1))) {
-        advance();
-        while(isAlphaNumeric(peek())) {
-          advance();
-        }
       }
       const text = this.source.substring(start, current);
       let type = keyword(text);

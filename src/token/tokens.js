@@ -5,36 +5,42 @@ function selfRef(...ts) {
   }, {});
 }
 
-function parts(whole, ...incl) {
- return Object.keys(whole)
-  .filter((k) => incl.indexOf(whole) > -1)
-  .reduce((acc, next) => {
-    acc[next] = whole[next];
-    return acc;
-  }, {});
+function join(...args) {
+  return Object.freeze(
+    Object.assign({}, ...args)
+  );
 }
 
-module.exports.TOKEN_TYPES = selfRef('LPAREN', 'RPAREN',
-                            'COMMA', 'DOT', 'AT',
-                            /* Operator */
-                            'EQ', 'BANG', 'BANGEQ',
-                            'GT', 'GTEQ', 'LT', 'LTEQ',
-                            'AND', 'OR', 'NOT',
-                            /**/
-                            'THIS', 'NEXT', 'LAST',
-                            'DAY', 'WEEK', 'MONTH', 'YEAR',
-                            'TODAY', 'TOMORROW', 'YESTERDAY',
-                            'AGO', 'HENCE',
-                            /* Literals */
-                            'NULL', 'EMPTY',
-                            'IDENTIFIER', 'STRING', 'NUMBER'
-                           );
+function simplePlural(...words) {
+  return words.map((word) => word + 'S');
+}
 
-module.exports.KEYWORDS = parts(module.exports.TOKEN_TYPES,
-                          'AND', 'OR', 'NOT',
-                          'THIS', 'NEXT', 'LAST',
-                          'DAY', 'WEEK', 'MONTH', 'YEAR',
-                          'TODAY', 'TOMORROW', 'YESTERDAY',
-                          'AGO', 'HENCE');
+const KEYWORDS = selfRef(
+  'AND', 'OR', 'NOT',
+  'THIS', 'NEXT', 'LAST', 'IN',
+  ...simplePlural('DAY', 'WEEK', 'MONTH', 'YEAR'),
+  'TODAY', 'TOMORROW', 'YESTERDAY',
+  'AGO', 'HENCE');
 
-module.exports.keyword = (k) => module.exports.KEYWORDS[String.prototype.toUpperCase.call(k)];
+const LITERALS = selfRef(
+  'NULL', 'EMPTY',
+  'IDENTIFIER', 'STRING', 'NUMBER'
+);
+
+const OPERATORS = selfRef(
+  'EQ', 'BANG', 'BANGEQ',
+  'GT', 'GTEQ', 'LT', 'LTEQ'
+);
+
+module.exports.TOKEN_TYPES = join(
+  selfRef(
+    'LPAREN', 'RPAREN', 'EOF',
+    'COMMA', 'DOT', 'AT'),
+    LITERALS, OPERATORS, KEYWORDS);
+
+const isInTokenGroup = (group) => (key) => group[String.prototype.toUpperCase.call(key)];
+
+module.exports.keyword = isInTokenGroup(KEYWORDS);
+module.exports.literal = isInTokenGroup(LITERALS);
+module.exports.operator = isInTokenGroup(OPERATORS);
+
