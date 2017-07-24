@@ -22,11 +22,11 @@ function scan(input) {
 //            ** PARSE **
 //           ${parse('poNumber = "123"')}`);
 
-
 parse('poNumber = "123"');
 console.log('\n------\n');
 parse('poNumber = "123" OR poNumber = "456"');
 console.log('\n------\n');
 parse('poNumber = "123" AND poNumber = "456"');
-
+console.log('\n------\n');
+parse('poNumber != "123"');
 module.exports = scan;

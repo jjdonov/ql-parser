@@ -96,10 +96,10 @@ module.exports = class Parser {
     };
 
     const operator = () => {
-      if(match(TOKEN_TYPES.EQ)) {
+      if(match(TOKEN_TYPES.EQ, TOKEN_TYPES.BANGEQ)) {
         return previous();
       }
-      throw new Error('Expected operator');
+      throw new Error(`Expected operator. Got : ${peek()}`);
     };
 
     const operand = () => {

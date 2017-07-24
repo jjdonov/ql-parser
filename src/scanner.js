@@ -25,8 +25,15 @@ module.exports = class Scanner {
       return current >= this.source.length;
     };
 
-    const match = (expecedChar) => {
-
+    const match = (expectedChar) => {
+      if(isAtEnd()) {
+        return false;
+      }
+      if(this.source.charAt(current) !== expectedChar) {
+        return true;
+      }
+      current++;
+      return true;
     };
 
     const peek = (distance = 0) => {
