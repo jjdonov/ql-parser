@@ -53,8 +53,6 @@ module.exports = class Parser {
       if(!isAtEnd()) {
         consume(TOKEN_TYPES.EOF, 'Not expecting anymore tokens.');
       }
-      console.log('CONDITIONS ->');
-      console.log(visit(ASTPrinter, q));
       return q;
     };
 
@@ -147,23 +145,3 @@ const createAndCondition =
     lCondition,
     rCondition});
 
-//Visitor
-const visit = (visitor, node) => visitor[node.type] ?
-  visitor[node.type].call(visitor, node) :
-  visitorErr(`visitor does not have ${node.type} defined. Has ${Object.keys(visitor)}`);
-
-const visitorErr = (msg) => {
-  throw new Error(msg);
-};
-
-const ASTPrinter = {
-  and: (node) => {
-    return `AND (${visit(ASTPrinter, node.lCondition)}), ${visit(ASTPrinter, node.rCondition)}`;
-  },
-  or: (node) => {
-    return `OR (${visit(ASTPrinter, node.lCondition)}), ${visit(ASTPrinter, node.rCondition)}`;
-  },
-  simple: (node) => {
-    return `${node.operator} (${node.lhs}, ${node.rhs})`;
-  }
-};

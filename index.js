@@ -1,11 +1,14 @@
+const ASTPrinter = require('./src/visitor/ast-printer.js');
 const Scanner = require('./src/scanner.js');
 const Parser = require('./src/parser.js');
+
 
 function parse(input) {
   const tokens = new Scanner(input).scan();
   console.log(`TOKENS ->
               ${tokens}`);
-  new Parser(tokens).parse();
+  const ast = new Parser(tokens).parse();
+  console.log(`AST: ${ASTPrinter.visit(ast)}`);
 }
 
 function err() {
