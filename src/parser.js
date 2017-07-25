@@ -1,4 +1,8 @@
-const {TOKEN_TYPES} = require('./token/tokens.js');
+const {TOKEN_TYPES} = require('./token/tokens');
+const {
+  createSimpleCondition,
+  createOrCondition,
+  createAndCondition} = require('./condition/condition-factory');
 
 module.exports = class Parser {
 
@@ -40,16 +44,6 @@ module.exports = class Parser {
 
     const query = () => {
       const q = orCondition();
-//      if(current.type === TOKEN_TYPES.LPAREN) {
-//        q = subCondition();
-//      }
-//      switch(current.type) {
-//        case TOKEN_TYPES.LPAREN:
-//          q = grouping();
-//          break;
-//        default:
-//          break;
-//      }
       if(!isAtEnd()) {
         consume(TOKEN_TYPES.EOF, 'Not expecting anymore tokens.');
       }
@@ -118,30 +112,4 @@ module.exports = class Parser {
   }
 
 };
-
-const OqlCondition = {
-  type: null,
-};
-
-const createSimpleCondition =
-    (lhs, operator, rhs) =>
-    Object.assign(Object.create(OqlCondition), {
-        type: 'simple',
-        lhs,
-        operator,
-        rhs});
-
-const createOrCondition =
-  (lCondition, rCondition) =>
-  Object.assign(Object.create(OqlCondition), {
-    type: 'or',
-    lCondition,
-    rCondition});
-
-const createAndCondition =
-  (lCondition, rCondition) =>
-  Object.assign(Object.create(OqlCondition), {
-    type: 'and',
-    lCondition,
-    rCondition});
 
