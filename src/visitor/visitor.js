@@ -7,4 +7,9 @@ const visitorErr = (msg) => {
   throw new Error(msg);
 };
 
-module.exports = visit;
+const logDecorator = (fn) => (...args) => {
+  console.log(`Invoking ${fn.name} with ${args[1].type}`);
+  return fn(...args);
+};
+
+module.exports = logDecorator(visit);

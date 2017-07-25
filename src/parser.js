@@ -1,6 +1,7 @@
 const {TOKEN_TYPES} = require('./token/tokens');
 const {
   createSimpleCondition,
+  createNegatedCondition,
   createOrCondition,
   createAndCondition} = require('./condition/condition-factory');
 
@@ -69,8 +70,12 @@ module.exports = class Parser {
     };
 
     const negatableCondition = () => {
-      //TODO: implement NOT and !
-      return simpleCondition();
+      let negate = 0;
+      while(match(TOKEN_TYPES.NOT, TOKEN_TYPES.BANG)) {
+        negate++;
+      }
+      console.log(`negate count: ${negate}`);
+      return negate % 2 === 1 ? createNegatedCondition(simpleCondition()) : simpleCondition();
     };
 
     const simpleCondition = () => {

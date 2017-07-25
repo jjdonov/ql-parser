@@ -1,3 +1,6 @@
+/**
+ *
+ */
 
 const OqlCondition = {
   type: null,
@@ -10,6 +13,12 @@ const createSimpleCondition =
         lhs,
         operator,
         rhs});
+
+const createNegatedCondition =
+  (condition) =>
+  Object.assign(Object.create(OqlCondition), {
+    type: 'negation',
+    condition});
 
 const createOrCondition =
   (lCondition, rCondition) =>
@@ -25,4 +34,4 @@ const createAndCondition =
     lCondition,
     rCondition});
 
-module.exports = Object.assign({}, {createSimpleCondition, createOrCondition, createAndCondition});
+module.exports = Object.assign({}, {createNegatedCondition, createSimpleCondition, createOrCondition, createAndCondition});

@@ -4,11 +4,18 @@ const Parser = require('./src/parser.js');
 
 
 function parse(input) {
-  const tokens = new Scanner(input).scan();
-  console.log(`TOKENS ->
-              ${tokens}`);
-  const ast = new Parser(tokens).parse();
-  console.log(`AST: ${ASTPrinter.visit(ast)}`);
+  try{
+    console.log(`Parsing input: ${input}`);
+    const tokens = new Scanner(input).scan();
+    console.log(`TOKENS ->
+                ${tokens}`);
+    const ast = new Parser(tokens).parse();
+    console.log(`AST ->
+                ${ASTPrinter.visit(ast)}`);
+  } catch(e) {
+    console.log(`*** FAILURE *** ->
+                ${e.message}`);
+  }
 }
 
 function err() {
@@ -32,4 +39,7 @@ console.log('\n------\n');
 parse('poNumber = "123" AND poNumber = "456"');
 console.log('\n------\n');
 parse('poNumber != "123"');
-module.exports = scan;
+console.log('\n------\n');
+parse('!poNumber = "123"');
+console.log('\n------\n');
+parse('!!poNumber = "123"');

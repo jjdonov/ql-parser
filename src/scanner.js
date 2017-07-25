@@ -30,7 +30,7 @@ module.exports = class Scanner {
         return false;
       }
       if(this.source.charAt(current) !== expectedChar) {
-        return true;
+        return false;
       }
       current++;
       return true;
@@ -155,6 +155,5 @@ module.exports = class Scanner {
     this.tokens.push(new Token('EOF', '', null, line, current));
     return this.tokens;
   }
-}
-
+};
 
