@@ -29,18 +29,19 @@ const LITERALS = selfRef(
 
 const OPERATORS = selfRef(
   'EQ', 'BANG', 'BANGEQ',
-  'GT', 'GTEQ', 'LT', 'LTEQ'
+  'GT', 'GTEQ', 'LT', 'LTEQ',
+  'STARTSWITH', 'ENDSWITH', 'CONTAINS'
 );
 
 module.exports.TOKEN_TYPES = join(
   selfRef(
     'LPAREN', 'RPAREN', 'EOF',
     'COMMA', 'DOT', 'AT'),
-    LITERALS, OPERATORS, KEYWORDS);
+  LITERALS, OPERATORS, KEYWORDS);
 
-const isInTokenGroup = (group) => (key) => group[String.prototype.toUpperCase.call(key)];
+const getFromTokenGroup = (group) => (key) => group[String.prototype.toUpperCase.call(key)];
 
-module.exports.keyword = isInTokenGroup(KEYWORDS);
-module.exports.literal = isInTokenGroup(LITERALS);
-module.exports.operator = isInTokenGroup(OPERATORS);
+module.exports.keyword = getFromTokenGroup(KEYWORDS);
+module.exports.literal = getFromTokenGroup(LITERALS);
+module.exports.operator = getFromTokenGroup(OPERATORS);
 

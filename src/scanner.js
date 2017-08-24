@@ -52,6 +52,10 @@ module.exports = class Scanner {
       return /[a-zA-Z0-9]/.test(c);
     };
 
+    const isWhiteSpace = (c) => {
+      return /\s+/.test(c);
+    }
+
     const isDigit = (c) => {
       return /[0-9]/.test(c);
     };
@@ -62,6 +66,23 @@ module.exports = class Scanner {
         advance();
       }
       const text = this.source.substring(start, current);
+      console.log(`TEXT: ${text}`);
+      if(text.toUpperCase() === 'STARTS' || text.toUpperCase() === 'ENDS') {
+        while(isWhiteSpace(peek())) {
+          advance();
+        }
+        const nextStart = current;
+        while(isAlphaNumeric(peek())) {
+          advance();
+        }
+        const next = this.source.substring(nextStart, current);
+        if(next.toUpperCase() === 'WITH') {
+           const tokenType = text === 'STARTS' ? TOKEN_TYPES.STARTSWITH : TOKEN_TYPES.ENDSWITH;
+            addToken(tokenType);
+            return;
+        }
+        throw new Error('Untermined ' + text + ' clause. Next was: ' + next);
+      }
       let type = keyword(text);
       addToken(type || TOKEN_TYPES.IDENTIFIER);
     };
