@@ -2,7 +2,6 @@ const ASTPrinter = require('./src/visitor/ast-printer.js');
 const Scanner = require('./src/scanner.js');
 const Parser = require('./src/parser.js');
 
-
 function parse(input) {
   try{
     console.log(`Parsing input: ${input}`);

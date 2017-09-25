@@ -15,19 +15,19 @@ function simplePlural(...words) {
   return words.map((word) => word + 'S');
 }
 
-const KEYWORDS = selfRef(
+module.exports.KEYWORDS = selfRef(
   'AND', 'OR', 'NOT',
   'THIS', 'NEXT', 'LAST', 'IN',
   ...simplePlural('DAY', 'WEEK', 'MONTH', 'YEAR'),
   'TODAY', 'TOMORROW', 'YESTERDAY',
   'AGO', 'HENCE');
 
-const LITERALS = selfRef(
+module.exports.LITERALS = selfRef(
   'NULL', 'EMPTY',
   'IDENTIFIER', 'STRING', 'NUMBER'
 );
 
-const OPERATORS = selfRef(
+module.exports.OPERATORS = selfRef(
   'EQ', 'BANG', 'BANGEQ',
   'GT', 'GTEQ', 'LT', 'LTEQ',
   'STARTSWITH', 'ENDSWITH', 'CONTAINS'
@@ -37,11 +37,13 @@ module.exports.TOKEN_TYPES = join(
   selfRef(
     'LPAREN', 'RPAREN', 'EOF',
     'COMMA', 'DOT', 'AT'),
-  LITERALS, OPERATORS, KEYWORDS);
+  module.exports.LITERALS,
+  module.exports.OPERATORS,
+  module.exports.KEYWORDS);
 
 const getFromTokenGroup = (group) => (key) => group[String.prototype.toUpperCase.call(key)];
 
-module.exports.keyword = getFromTokenGroup(KEYWORDS);
-module.exports.literal = getFromTokenGroup(LITERALS);
-module.exports.operator = getFromTokenGroup(OPERATORS);
+module.exports.keyword = getFromTokenGroup(module.exports.KEYWORDS);
+module.exports.literal = getFromTokenGroup(module.exports.LITERALS);
+module.exports.operator = getFromTokenGroup(module.exports.OPERATORS);
 

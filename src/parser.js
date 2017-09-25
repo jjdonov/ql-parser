@@ -1,4 +1,4 @@
-const {TOKEN_TYPES} = require('./token/tokens');
+const {TOKEN_TYPES, OPERATORS} = require('./token/tokens');
 const {
   createSimpleCondition,
   createNegatedCondition,
@@ -26,6 +26,10 @@ module.exports = class Parser {
           throw new Error(message);
       }
       index++;
+    };
+
+    const matchGroup = (group) => {
+      return match(...Object.values(group));
     };
 
     const match = (...tokenTypes) => {
@@ -93,7 +97,7 @@ module.exports = class Parser {
     };
 
     const operator = () => {
-      if(match(TOKEN_TYPES.EQ, TOKEN_TYPES.BANGEQ)) {
+      if(matchGroup(OPERATORS)) {
         return previous();
       }
       throw new Error(`Expected operator. Got : ${peek()}`);
