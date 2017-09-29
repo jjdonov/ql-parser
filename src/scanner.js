@@ -1,4 +1,4 @@
-const {TOKEN_TYPES, KEYWORDS, keyword} = require('./token/tokens.js');
+const {TOKEN_TYPES, KEYWORDS, keyword} = require('./token/token-types.js');
 const Token = require('./token/token.js');
 
 /**

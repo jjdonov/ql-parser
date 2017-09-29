@@ -1,4 +1,4 @@
-const {TOKEN_TYPES, OPERATORS} = require('./token/tokens');
+const {TOKEN_TYPES, OPERATORS} = require('./token/token-types');
 const {
   createSimpleCondition,
   createNegatedCondition,

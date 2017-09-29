@@ -12,7 +12,7 @@ function join(...args) {
 }
 
 function simplePlural(...words) {
-  return words.map((word) => word + 'S');
+  return words.concat(words.map((word) => word + 'S'));
 }
 
 module.exports.KEYWORDS = selfRef(
