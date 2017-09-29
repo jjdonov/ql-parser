@@ -66,7 +66,6 @@ module.exports = class Scanner {
         advance();
       }
       const text = this.source.substring(start, current);
-      console.log(`TEXT: ${text}`);
       if(text.toUpperCase() === 'STARTS' || text.toUpperCase() === 'ENDS') {
         while(isWhiteSpace(peek())) {
           advance();

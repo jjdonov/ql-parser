@@ -1,4 +1,4 @@
-const createAccessor = require('../src/object-path/object-path.js');
+const {createAccessor} = require('../src/object-path/object-path.js');
 const expect = require('chai').expect;
 
 const order = {

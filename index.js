@@ -1,6 +1,7 @@
 const ASTPrinter = require('./src/visitor/ast-printer.js');
 const Scanner = require('./src/scanner.js');
 const Parser = require('./src/parser.js');
+const Interpreter = require('./src/visitor/interpreter.js');
 
 function parse(input) {
   try{
@@ -11,6 +12,9 @@ function parse(input) {
     const ast = new Parser(tokens).parse();
     console.log(`AST ->
                 ${ASTPrinter.visit(ast)}`);
+    console.log('EVAL');
+    const fun = Interpreter.interpret(ast);
+    console.log(' Result: ' + fun({poNumber: "123"}));
   } catch(e) {
     console.log(`*** FAILURE *** ->
                 ${e.message}`);
@@ -31,7 +35,7 @@ function scan(input) {
 //            ** PARSE **
 //           ${parse('poNumber = "123"')}`);
 
-//parse('poNumber = "123"');
+parse('poNumber = "123"');
 //console.log('\n------\n');
 //parse('poNumber = "123" OR poNumber = "456"');
 //console.log('\n------\n');
@@ -43,4 +47,4 @@ function scan(input) {
 //console.log('\n------\n');
 //parse('!!poNumber = "123"');
 //console.log('\n------\n');
-parse('poNumber STARTS WITH "123"');
+//parse('poNumber STARTS WITH "123"');

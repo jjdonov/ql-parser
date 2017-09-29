@@ -78,7 +78,6 @@ module.exports = class Parser {
       while(match(TOKEN_TYPES.NOT, TOKEN_TYPES.BANG)) {
         negate++;
       }
-      console.log(`negate count: ${negate}`);
       return negate % 2 === 1 ? createNegatedCondition(simpleCondition()) : simpleCondition();
     };
 

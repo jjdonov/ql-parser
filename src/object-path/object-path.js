@@ -11,7 +11,7 @@
  */
 function createAccessor(path) {
   if(/\s+/.test(path)) {
-    throw new Error("path cannot have whitespace");
+    throw new Error("path cannot have whitespace '" + path + "'");
   }
   const parts = path.split('.');
   return (target) => {
@@ -45,4 +45,4 @@ function dfs(toTraverse) {
   return results;
 }
 
-module.exports = createAccessor;
+module.exports.createAccessor = createAccessor;
