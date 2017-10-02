@@ -103,10 +103,36 @@ module.exports = class Parser {
     };
 
     const operand = () => {
-      if(match(TOKEN_TYPES.STRING, TOKEN_TYPES.NUMBER)) {
+      if(match(TOKEN_TYPES.NUMBER)) {
         return previous();
+      } else if (match(TOKEN_TYPES.STRING)){
+        //may have to check for quoted dates
+        return previous();
+      } else if (match(TOKEN_TYPES.LPAREN)) {
+        return list();
+      } else if(match(TOKEN_TYPES.AT)) {
+        return relativeDate();
       }
       throw new Error('Expected operand');
+    };
+
+    const list = () => {
+      consume(TOKEN_TYPES.LPAREN);
+      throw new Error("Parser -> list is unimplemented");
+    };
+
+    const relativeDate = () => {
+      consume(TOKEN_TYPES.AT);
+      consume(TOKEN_TYPES.LPAREN);
+      if(match(TOKEN_TYPES.TODAY, TOKEN_TYPES.TOMORROW, TOKEN_TYPES.YESTERDAY)) {
+        //TODAY, TOMMOROW, YESTERDAY
+      } else if(match(TOKEN_TYPES.NUMBER)) {
+        //<NUMBER> <DATE_UNIT> <DIRECTION>
+      } else if(match(TOKEN_TYPES.THIS, TOKEN_TYPES.LAST, TOKEN_TYPES.NEXT)) {
+        //THIS, LAST, NEXT <DATE_UNIT> [<INCLUSION>]
+      }
+      throw new Error("Parser -> relativeDate is unimplemented");
+      //consume(TOKEN_TYPES.RPAREN);
     };
 
     const subCondition = () => {
@@ -114,6 +140,7 @@ module.exports = class Parser {
       q = query();
       consume(TOKEN_TYPES.RPAREN);
       q = group(q);
+      return q;
     };
 
     return query();

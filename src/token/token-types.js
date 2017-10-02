@@ -15,12 +15,19 @@ function simplePlural(...words) {
   return words.concat(words.map((word) => word + 'S'));
 }
 
-module.exports.KEYWORDS = selfRef(
-  'AND', 'OR', 'NOT',
-  'THIS', 'NEXT', 'LAST', 'IN',
-  ...simplePlural('DAY', 'WEEK', 'MONTH', 'YEAR'),
-  'TODAY', 'TOMORROW', 'YESTERDAY',
-  'AGO', 'HENCE');
+
+//Date Token Sub Groups
+const  DATE_UNIT = selfRef(...simplePlural('DAY', 'WEEK', 'MONTH', 'YEAR'));
+const SINGLE_DATE = selfRef('TODAY', 'TOMORROW', 'YESTERDAY');
+const INCLUSION = {};
+const DATE_RANGE_INDICATOR = selfRef('THIS', 'LAST', 'NEXT');
+const DATE_DIRECTION = selfRef('AGO', 'HENCE');
+
+//Token Super Groups
+module.exports.KEYWORDS = join(
+  selfRef('AND', 'OR', 'NOT'),
+  DATE_UNIT, SINGLE_DATE, DATE_RANGE_INDICATOR, DATE_DIRECTION
+);
 
 module.exports.LITERALS = selfRef(
   'NULL', 'EMPTY',
@@ -28,7 +35,7 @@ module.exports.LITERALS = selfRef(
 );
 
 module.exports.OPERATORS = selfRef(
-  'EQ', 'BANG', 'BANGEQ',
+  'EQ', 'BANG', 'BANGEQ','IN',
   'GT', 'GTEQ', 'LT', 'LTEQ',
   'STARTSWITH', 'ENDSWITH', 'CONTAINS'
 );
@@ -46,4 +53,3 @@ const getFromTokenGroup = (group) => (key) => group[String.prototype.toUpperCase
 module.exports.keyword = getFromTokenGroup(module.exports.KEYWORDS);
 module.exports.literal = getFromTokenGroup(module.exports.LITERALS);
 module.exports.operator = getFromTokenGroup(module.exports.OPERATORS);
-

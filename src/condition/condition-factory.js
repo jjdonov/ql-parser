@@ -1,37 +1,35 @@
-/**
- *
- */
-
 const OqlCondition = {
   type: null,
 };
 
-const createSimpleCondition =
-    (lhs, operator, rhs) =>
-    Object.assign(Object.create(OqlCondition), {
-        type: 'simple',
-        lhs,
-        operator,
-        rhs});
+function makeCondition(source) {
+  return Object.assign(Object.create(OqlCondition), source);
+}
 
-const createNegatedCondition =
+module.exports.createSimpleCondition =
+    (lhs, operator, rhs) =>
+    makeCondition({
+      type: 'simple',
+      lhs,
+      operator,
+      rhs});
+
+module.exports.createNegatedCondition =
   (condition) =>
-  Object.assign(Object.create(OqlCondition), {
+  makeCondition({
     type: 'negation',
     condition});
 
-const createOrCondition =
+module.exports.createOrCondition =
   (lCondition, rCondition) =>
-  Object.assign(Object.create(OqlCondition), {
+  makeCondition({
     type: 'or',
     lCondition,
     rCondition});
 
-const createAndCondition =
+module.exports.createAndCondition =
   (lCondition, rCondition) =>
-  Object.assign(Object.create(OqlCondition), {
+  makeCondition({
     type: 'and',
     lCondition,
     rCondition});
-
-module.exports = Object.assign({}, {createNegatedCondition, createSimpleCondition, createOrCondition, createAndCondition});
