@@ -4,7 +4,7 @@
   "description": "OQL (Object Query Language) Parser Implementation",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec"
+    "test": "./node_modules/.bin/mocha --reporter spec --recursive"
   },
   "author": "jjdonov",
   "license": "MIT",

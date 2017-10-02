@@ -17,8 +17,7 @@ module.exports.createSimpleCondition =
 module.exports.createNegatedCondition =
   (condition) =>
   makeCondition({
-    type: 'negation',
-    condition});
+    type: 'negation', condition});
 
 module.exports.createOrCondition =
   (lCondition, rCondition) =>

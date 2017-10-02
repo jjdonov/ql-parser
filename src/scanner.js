@@ -1,4 +1,4 @@
-const {TOKEN_TYPES, KEYWORDS, keyword} = require('./token/token-types.js');
+const {TOKEN_TYPES, KEYWORDS} = require('./token/token-types.js');
 const Token = require('./token/token.js');
 
 /**
@@ -82,7 +82,7 @@ module.exports = class Scanner {
         }
         throw new Error('Untermined ' + text + ' clause. Next was: ' + next);
       }
-      let type = keyword(text);
+      let type = KEYWORDS[text];
       addToken(type || TOKEN_TYPES.IDENTIFIER);
     };
 
