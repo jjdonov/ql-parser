@@ -1,5 +1,11 @@
-const {TOKEN_TYPES, KEYWORDS} = require('./token/token-types.js');
-const Token = require('./token/token.js');
+const {TOKEN_TYPES, KEYWORDS} = require('../token/token-types.js');
+const Token = require('../token/token.js');
+const {
+  isWhiteSpace,
+  isAlpha,
+  isAlphaNumeric,
+  isDigit
+} = require('./patterns');
 
 /**
  *
@@ -41,23 +47,6 @@ module.exports = class Scanner {
         return '\0';
       }
       return this.source.charAt(current + distance);
-    };
-
-    //identifying
-    const isAlpha = (c) => {
-      return /[a-zA-Z]/.test(c);
-    };
-
-    const isAlphaNumeric = (c) => {
-      return /[a-zA-Z0-9]/.test(c);
-    };
-
-    const isWhiteSpace = (c) => {
-      return /\s+/.test(c);
-    }
-
-    const isDigit = (c) => {
-      return /[0-9]/.test(c);
     };
 
     //adding tokens
