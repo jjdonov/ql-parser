@@ -18,18 +18,7 @@ module.exports = class Parser {
     let index = 0;
     const length = this.tokens.length;
 
-    const dbg = (fn) => (...args) => {
-      console.log(`
-                  index: ${index}
-                  length: ${length}
-                  isAtEnd: ${isAtEnd()}
-                  currentToken: ${this.tokens[index]}
-                  args: ${args}
-                  `) ;
-      return fn(...args);
-    };
-
-    const peek = dbg((distance = 0) => this.tokens[index + distance]);
+    const peek = (distance = 0) => this.tokens[index + distance];
     const isAtEnd = () =>  length < index;
     const previous = () => peek(-1);
     const consume = (type, message) => {
