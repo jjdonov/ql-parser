@@ -1,6 +1,6 @@
 const ASTPrinter = require('./src/visitor/ast-printer.js');
 const Scanner = require('./src/scanner');
-const Parser = require('./src/parser.js');
+const Parser = require('./src/parser');
 const Interpreter = require('./src/visitor/interpreter.js');
 
 function parse(input) {
