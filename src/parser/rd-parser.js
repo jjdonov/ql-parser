@@ -102,4 +102,4 @@ const subCondition = (controller) => {
   return q;
 };
 
-module.exports = {query};
+module.exports = {query, simpleCondition, field, operator, operand};
