@@ -112,7 +112,17 @@ describe('controls', () => {
   });
 
   describe('matchGroup', () => {
-    it('can match entire token groups');
+    const controls = controller({
+      index: 0,
+      length: 22,
+      tokens: [{type: 'matchMe'}, {type: 'matchMe'}]
+    });
+    it('can match entire token groups', () => {
+      expect(controls.matchGroup({
+        'matchMe': 'matchMe',
+        'dontMatchMe': 'dontMatchMe'
+      })).to.equal(true);
+    });
   });
 
 });
