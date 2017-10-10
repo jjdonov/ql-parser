@@ -2,6 +2,9 @@ module.exports = (parserState) => {
 
   const peek = (distance = 0) => {
     const targetIndex = parserState.index + distance;
+    if(targetIndex < 0 || targetIndex > parserState.length) {
+      throw new RangeError(`Cannot peek at ${targetIndex} it is outside the range 0 -> ${parserState.length}`);
+    }
     const targetToken = parserState.tokens[targetIndex];
     return targetToken;
   };
