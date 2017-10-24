@@ -93,4 +93,42 @@ describe('patterns', () => {
     });
   });
 
+  describe('isDate', () => {
+    it('rejects the empty string', () => {
+      expect(patterns.isDate('')).to.equal(false);
+    });
+    it('rejects date with time', () => {
+      expect(patterns.isDate('2017-12-25 12:00:00.000')).to.equal(false);
+    });
+    it('accepts yyyy-MM-dd string', () => {
+      expect(patterns.isDate('2017-12-25')).to.equal(true);
+    });
+  });
+
+  describe('isTime', () => {
+    it('rejects the empty string', () => {
+      expect(patterns.isTime('')).to.equal(false);
+    });
+    it('rejects date with time', () => {
+      expect(patterns.isTime('2017-23-12')).to.equal(false);
+    });
+    it('accepts hh:mm:ss.uuu string', () => {
+      expect(patterns.isTime('23:01:00.000')).to.equal(true);
+    });
+  });
+
+  describe('isTimeWithTimeZone', () => {
+    it('rejects time without tz');
+  });
+
+  describe('isDateTime', () => {
+    it('rejects the empty string');
+    it('rejects date only');
+    it('rejects time only');
+  });
+
+  describe('isDateTimeWithTimeZone', () => {
+    it('rejects datetime without tz');
+  });
+
 });
