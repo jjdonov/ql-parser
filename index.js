@@ -42,6 +42,7 @@ function scan(input) {
 //           ${parse('poNumber = "123"')}`);
 
 parse('poNumber = "123"');
+parse('orderDate = \'2017-15-21\'');
 //console.log('\n------\n');
 //parse('poNumber = "123" OR poNumber = "456"');
 //console.log('\n------\n');

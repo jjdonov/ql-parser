@@ -65,7 +65,8 @@ const operand = (controller) => {
   if(controller.match(TOKEN_TYPES.NUMBER)) {
     return controller.previous();
   } else if (controller.match(TOKEN_TYPES.STRING)){
-    //may have to check for quoted dates
+    return controller.previous();
+  } else if(controller.match(TOKEN_TYPES.DATE)) {
     return controller.previous();
   } else if (controller.match(TOKEN_TYPES.LPAREN)) {
     return list(controller);
