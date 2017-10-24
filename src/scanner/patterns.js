@@ -57,7 +57,7 @@ patterns.isDateTimeWithTimeZone = (c) => {
  * @return [Boolean, Type]
  */
 patterns.isDateLiteral = (c) => {
-  throw new Error('Unimplemented');
+
 };
 
 module.exports = patterns;

@@ -31,7 +31,7 @@ module.exports.KEYWORDS = join(
 
 module.exports.LITERALS = selfRef(
   'NULL', 'EMPTY',
-  'IDENTIFIER', 'STRING', 'NUMBER'
+  'IDENTIFIER', 'STRING', 'NUMBER', 'DATE'
 );
 
 module.exports.OPERATORS = selfRef(
