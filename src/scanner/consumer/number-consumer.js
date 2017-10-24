@@ -1,14 +1,17 @@
+const {isDigit} = require('../patterns');
+const {TOKEN_TYPES} = require('../../token/token-types');
+
 module.exports = function consumeNumber() {
-  while(isDigit(scanner.peek())) {
-    scanner.advance();
+  while(isDigit(this.peek())) {
+    this.advance();
   }
-  if(scanner.peek() === '.' && isDigit(scanner.peek(1))) {
-      scanner.advance();
-      while(isDigit(scanner.peek())) {
-        scanner.advance();
+  if(this.peek() === '.' && isDigit(this.peek(1))) {
+      this.advance();
+      while(isDigit(this.peek())) {
+        this.advance();
       }
   }
-  const num = Number.parseFloat(scanner.currentText());
-  scanner.addToken(TOKEN_TYPES.NUMBER, num);
+  const num = Number.parseFloat(this.currentText());
+  this.addToken(TOKEN_TYPES.NUMBER, num);
 };
 
