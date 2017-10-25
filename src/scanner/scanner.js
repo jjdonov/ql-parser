@@ -15,8 +15,9 @@ module.exports = class Scanner {
   }
 
   advance(distance = 1) {
+    const retVal = this.source.substr(this.current, distance);
     this.current += distance;
-    return this.source.charAt(this.current - 1);
+    return retVal;
   }
 
   isAtEnd() {
@@ -27,7 +28,7 @@ module.exports = class Scanner {
     if(this.isAtEnd()) {
       return false;
     }
-    if(this.source.charAt(current) !== expectedChar) {
+    if(this.peek() !== expectedChar) {
       return false;
     }
     this.current++;
@@ -38,7 +39,7 @@ module.exports = class Scanner {
     if(this.isAtEnd()) {
       return '\0';
     }
-    return this.source.charAt(this.current + distance);
+    return this.source.substr(this.current, 1 + distance);
   }
 
   currentText() {

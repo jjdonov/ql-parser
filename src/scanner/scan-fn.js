@@ -2,7 +2,8 @@ const {
   isWhiteSpace,
   isAlpha,
   isAlphaNumeric,
-  isDigit
+  isDigit,
+  isDate
 } = require('./patterns');
 const {TOKEN_TYPES, KEYWORDS} = require('../token/token-types.js');
 
@@ -45,16 +46,24 @@ module.exports = (scanner) => {
         break;
       case '"':
       case '\'':
+        //TODO: need to check for date/time here as well.
         scanner.string(c);
         break;
       default:
         if(isDigit(c)) {
-          scanner.number();
+          if(isDate(c + scanner.peek(10))) {
+            scanner.date(c);
+          } else if(isTime(c + scanner.peek(12))) {
+            throw new Error('we have no time to talk about time');
+          } else {
+            scanner.number();
+          }
         } else if (isAlpha(c)) {
           scanner.identifier();
         } else {
           //err();
-          throw new Error('Unknown token.');
+          throw new Error(`Unknown token: ${c}
+                          Tokens: ${scanner.tokens}`);
         }
         break;
     }

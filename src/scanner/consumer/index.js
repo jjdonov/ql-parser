@@ -1,8 +1,9 @@
-const number = require('./number-consumer');
-const string = require('./string-consumer');
-const identifier = require('./identifier-consumer');
-
-const consumers = {number, string, identifier};
+const consumers = {
+  date : require('./date-consumer'),
+  identifier : require('./identifier-consumer'),
+  number : require('./number-consumer'),
+  string : require('./string-consumer'),
+};
 
 /*jshint ignore:start*/
 module.exports.allConsumers = function all(scanner) {
