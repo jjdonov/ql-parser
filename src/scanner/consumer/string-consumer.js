@@ -10,9 +10,5 @@ module.exports = function consumeString(quoteType) {
   }
   this.advance();
   const text = this.source.substring(this.start + 1, this.current - 1);
-  if(quoteType === '\'' && patterns.isDate(text)) {
-    this.addToken(TOKEN_TYPES.DATE, text);
-  } else {
-    this.addToken(TOKEN_TYPES.STRING, text);
-  }
+  this.addToken(TOKEN_TYPES.STRING, text);
 };

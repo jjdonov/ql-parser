@@ -44,16 +44,27 @@ module.exports = (scanner) => {
       case '\r':
       case '\n':
         break;
-      case '"':
       case '\'':
-        //TODO: need to check for date/time here as well.
+        if(isDate(scanner.peek(9))) {
+          scanner.date();
+          const closingQuote = scanner.advance();
+          if(closingQuote !== '\'') {
+            throw new Error(`Unterminated quoted date: ${closingQuote}`);
+          }
+        } else if(false /*isTime*/) {
+
+        } else {
+          scanner.string(c);
+        }
+        break;
+      case '"':
         scanner.string(c);
         break;
       default:
         if(isDigit(c)) {
-          if(isDate(c + scanner.peek(10))) {
+          if(isDate(c + scanner.peek(9))) {
             scanner.date(c);
-          } else if(isTime(c + scanner.peek(12))) {
+          } else if(isTime(c + scanner.peek(11))) {
             throw new Error('we have no time to talk about time');
           } else {
             scanner.number();
@@ -63,7 +74,7 @@ module.exports = (scanner) => {
         } else {
           //err();
           throw new Error(`Unknown token: ${c}
-                          Tokens: ${scanner.tokens}`);
+                          Tokens consumed so far: ${scanner.tokens}`);
         }
         break;
     }

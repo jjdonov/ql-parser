@@ -1,7 +1,7 @@
 const {TOKEN_TYPES} = require('../../token/token-types');
 
 module.exports = function consumeDate(c) {
-  const year = c + this.advance(3);
+  const year = c ? c + this.advance(3) : this.advance(4);
   this.advance();
   const month = this.advance(2);
   this.advance();

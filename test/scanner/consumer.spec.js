@@ -13,14 +13,6 @@ describe('consumer', () => {
       const consume = () => stringConsumer.bind(t)('\'');
       expect(consume).to.throw(/EOF/);
     });
-    it('returns a date token for single quote type and date pattern', () => {
-      const t = dummyScanner('\'2017-12-25\'');
-      const consumer = stringConsumer.bind(t);
-      consumer('\'');
-      const firstToken = t.tokens.pop();
-      expect(firstToken.type).to.equal('DATE');
-    });
-    it('returns string otherwise');
   });
 
 //  describe('numberConsumer', () => {
