@@ -1,13 +1,13 @@
-const {isDigit} = require('../patterns');
+const patterns = require('../patterns');
 const {TOKEN_TYPES} = require('../../token/token-types');
 
 module.exports = function consumeNumber() {
   while(isDigit(this.peek())) {
     this.advance();
   }
-  if(this.peek() === '.' && isDigit(this.peek(1))) {
+  if(this.peek() === '.' && patterns.isDigit(this.peek(1))) {
       this.advance();
-      while(isDigit(this.peek())) {
+      while(patterns.isDigit(this.peek())) {
         this.advance();
       }
   }
