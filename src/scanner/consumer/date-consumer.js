@@ -6,5 +6,6 @@ module.exports = function consumeDate(c) {
   const month = this.advance(2);
   this.advance();
   const day = this.advance(2);
-  this.addToken(TOKEN_TYPES.DATE, {year, month, day});
+  //TODO: validation should live in parser?
+  this.addToken(TOKEN_TYPES.DATE, [year, month, day].join("-") /*{year, month, day}*/);
 };

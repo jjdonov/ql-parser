@@ -20,7 +20,13 @@ function parse(input) {
                 ${ASTPrinter.visit(ast)}`);
     console.log('EVAL');
     const fun = Interpreter.interpret(ast);
-    console.log(' Result: ' + fun({poNumber: "123"}));
+    console.log(' Result: ' + fun({
+      poNumber: "123",
+      orderTerms: {
+        orderDate: {
+          Issue: '2017-15-21'
+        }
+      }}));
   } catch(e) {
     console.log(`*** FAILURE *** ->
                 ${e.stack}`);
@@ -41,8 +47,8 @@ function scan(input) {
 //            ** PARSE **
 //           ${parse('poNumber = "123"')}`);
 
-parse('poNumber = "123"');
-parse('orderDate = \'2017-15-21\'');
+//parse('poNumber = "123"');
+parse('orderTerms.orderDate.Issue = \'2017-15-21\'');
 //console.log('\n------\n');
 //parse('poNumber = "123" OR poNumber = "456"');
 //console.log('\n------\n');

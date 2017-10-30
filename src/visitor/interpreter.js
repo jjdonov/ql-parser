@@ -27,7 +27,7 @@ const Interpreter = {
           console.log(`lhs ->
                       ${JSON.stringify(vals)}`);
           console.log(`rhs ->
-                      ${node.rhs.literal}`);
+                      ${JSON.stringify(node.rhs.literal)}`);
           return  vals[0] == node.rhs.literal;
         };
         break;
