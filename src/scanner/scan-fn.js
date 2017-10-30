@@ -3,7 +3,8 @@ const {
   isAlpha,
   isAlphaNumeric,
   isDigit,
-  isDate
+  isDate,
+  isTime
 } = require('./patterns');
 const {TOKEN_TYPES, KEYWORDS} = require('../token/token-types.js');
 
@@ -47,12 +48,16 @@ module.exports = (scanner) => {
       case '\'':
         if(isDate(scanner.peek(9))) {
           scanner.date();
-          const closingQuote = scanner.advance();
+          let closingQuote = scanner.advance();
           if(closingQuote !== '\'') {
             throw new Error(`Unterminated quoted date: ${closingQuote}`);
           }
-        } else if(false /*isTime*/) {
-
+        } else if(isTime(scanner.peek(11))) {
+          scanner.time();
+          let closingQuote = scanner.advance();
+          if(closingQuote !== '\'') {
+            throw new Error(`Unterminated quoted time: ${closingQuote}`);
+          }
         } else {
           scanner.string(c);
         }
@@ -61,14 +66,12 @@ module.exports = (scanner) => {
         scanner.string(c);
         break;
       default:
-        if(isDigit(c)) {
-          if(isDate(c + scanner.peek(9))) {
-            scanner.date(c);
-          } else if(isTime(c + scanner.peek(11))) {
-            throw new Error('we have no time to talk about time');
-          } else {
-            scanner.number();
-          }
+        if(isDate(c + scanner.peek(9))) {
+          scanner.date(c);
+        } else if(isTime(c + scanner.peek(11))) {
+          throw new Error('we have no time to talk about time');
+        } else if(isDigit(c)){
+          scanner.number();
         } else if (isAlpha(c)) {
           scanner.identifier();
         } else {

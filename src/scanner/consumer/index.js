@@ -3,6 +3,7 @@ const consumers = {
   identifier : require('./identifier-consumer'),
   number : require('./number-consumer'),
   string : require('./string-consumer'),
+  time: () => false
 };
 
 /*jshint ignore:start*/
