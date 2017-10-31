@@ -1,6 +1,7 @@
 //interpreter
 const visit = require('./visitor');
-const ObjectPath = require('../object-path/object-path.js');
+//const ObjectPath = require('../object-path/object-path.js');
+const Predicates = require('../interpreter/predicates');
 
 const Interpreter = {
   and: (node) => {
@@ -15,21 +16,11 @@ const Interpreter = {
   simple: (node) => {
     console.log(`Evaluating:
                 ${JSON.stringify(node)}`);
-    const accessor = ObjectPath.createAccessor(node.lhs.lexeme);
+//    const accessor = ObjectPath.createAccessor(node.lhs.lexeme);
     let predicate;
     switch(node.operator.type) {
       case 'EQ':
-        predicate = (a) => {
-          const vals = accessor(a);
-          if(vals.length > 1) {
-            throw new Error('too many matches');
-          }
-          console.log(`lhs ->
-                      ${JSON.stringify(vals)}`);
-          console.log(`rhs ->
-                      ${JSON.stringify(node.rhs.literal)}`);
-          return  vals[0] == node.rhs.literal;
-        };
+        predicate = Predicates.simplePredicate(node);
         break;
       case 'BANGEQ':
         predicate = (a, b) => a != b;

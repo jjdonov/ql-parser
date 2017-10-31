@@ -4,8 +4,26 @@ const Parser = require('./src/parser');
 const Interpreter = require('./src/visitor/interpreter.js');
 
 function parse(input) {
+
+  const seed = [{
+    poNumber: "123",
+    orderTerms: {
+      orderDate: {
+        Issue: '2017-15-21'
+      }
+    }
+  }, {
+    poNumber: "456",
+    orderTerms: {
+      orderDate: {
+        Issue: '2017-15-20'
+      }
+    }
+  }];
+
   try{
     console.log(`Parsing input: ${input}`);
+    console.log('Operating on:\n' + JSON.stringify(seed, null, 4));
     const tokens = new Scanner(input).scan();
     tokens.forEach((t, i) => {
       if(!t.type) {
@@ -20,13 +38,8 @@ function parse(input) {
                 ${ASTPrinter.visit(ast)}`);
     console.log('EVAL');
     const fun = Interpreter.interpret(ast);
-    console.log(' Result: ' + fun({
-      poNumber: "123",
-      orderTerms: {
-        orderDate: {
-          Issue: '2017-15-21'
-        }
-      }}));
+    const result =seed.filter(fun);
+    console.log(' Result: ' + JSON.stringify(result, null, 4));
   } catch(e) {
     console.log(`*** FAILURE *** ->
                 ${e.stack}`);

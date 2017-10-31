@@ -8,7 +8,8 @@ describe('Scanner', () => {
     expect(tokens.length).to.equal(2);
     const dateToken = tokens.shift();
     expect(dateToken.type).to.equal('DATE');
-    expect(dateToken.literal).to.deep.equal({year: '2017', month: '12', day: '25'});
+    //expect(dateToken.literal).to.deep.equal({year: '2017', month: '12', day: '25'});
+    expect(dateToken.literal).to.deep.equal('2017-12-25');
   });
 
   it('does something with quoted date', () => {
@@ -17,7 +18,7 @@ describe('Scanner', () => {
     expect(tokens.length).to.equal(2);
     const dateToken = tokens.shift();
     expect(dateToken.type).to.equal('DATE');
-    expect(dateToken.literal).to.deep.equal({year: '2017', month: '12', day: '25'});
-
+    //expect(dateToken.literal).to.deep.equal({year: '2017', month: '12', day: '25'});
+    expect(dateToken.literal).to.deep.equal('2017-12-25');
   });
 });
