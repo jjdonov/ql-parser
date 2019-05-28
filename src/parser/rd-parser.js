@@ -33,12 +33,21 @@ const andCondition = controller => {
 };
 
 const negatableCondition = controller => {
-  const simpleCond = () => simpleCondition(controller);
+  const subCond = () => subCondition(controller);
   let negate = 0;
   while (controller.match(TOKEN_TYPES.NOT, TOKEN_TYPES.BANG)) {
     negate++;
   }
-  return negate % 2 === 1 ? createNegatedCondition(simpleCond()) : simpleCond();
+  return negate % 2 === 1 ? createNegatedCondition(subCond()) : subCond();
+};
+
+const subCondition = controller => {
+  if (controller.match(TOKEN_TYPES.LPAREN)) {
+    const condition = orCondition(controller);
+    controller.consume(TOKEN_TYPES.RPAREN);
+    return condition;
+  }
+  return simpleCondition(controller);
 };
 
 const simpleCondition = controller => {
@@ -104,19 +113,9 @@ const relativeDate = controller => {
   //controller.consume(TOKEN_TYPES.RPAREN);
 };
 
-/**
- * Sub conditions will be implemented later
- */
-//const subCondition = controller => {
-//  controller.consume(TOKEN_TYPES.LPAREN);
-//  q = query();
-//  controller.consume(TOKEN_TYPES.RPAREN);
-//  q = group(q);
-//  return q;
-//};
-
 module.exports = {
   query,
+  subCondition,
   simpleCondition,
   negatableCondition,
   field,

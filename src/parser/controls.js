@@ -39,7 +39,8 @@ module.exports = parserState => {
     if (isAtEnd()) {
       return false;
     }
-    return peek().type === tokenType;
+    const next = peek();
+    return next.type === tokenType;
   };
 
   return {
