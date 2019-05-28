@@ -1,11 +1,11 @@
 /*eslint-disable no-console*/
-const ASTPrinter = require('./src/visitor/ast-printer.js');
-const Scanner = require('./src/scanner');
-const Parser = require('./src/parser');
-const Interpreter = require('./src/visitor/interpreter.js');
+const ASTPrinter = require('../src/visitor/ast-printer.js');
+const Scanner = require('../src/scanner');
+const Parser = require('../src/parser');
+const Interpreter = require('../src/visitor/interpreter.js');
 
 function parse(input) {
-  const seed = [
+  const data = [
     {
       poNumber: '123',
       orderTerms: {
@@ -25,8 +25,9 @@ function parse(input) {
   ];
 
   try {
+    console.log('--------------------');
     console.log(`Parsing input: ${input}`);
-    console.log('Operating on:\n' + JSON.stringify(seed, null, 4));
+    console.log('Operating on:\n' + JSON.stringify(data, null, 4));
     const tokens = new Scanner(input).scan();
     tokens.forEach((t, i) => {
       if (!t.type) {
@@ -41,13 +42,15 @@ function parse(input) {
                 ${ASTPrinter.visit(ast)}`);
     console.log('EVAL');
     const fun = Interpreter.interpret(ast);
-    const result = seed.filter(fun);
+    const result = data.filter(fun);
     console.log(' Result: ' + JSON.stringify(result, null, 4));
   } catch (e) {
     console.log(`*** FAILURE *** ->
                 ${e.stack}`);
   }
 }
+
+parse("orderTerms.orderDate.Issue = '2017-15-21'");
 
 //function err() {}
 //
@@ -62,7 +65,6 @@ function parse(input) {
 //           ${parse('poNumber = "123"')}`);
 
 //parse('poNumber = "123"');
-parse("orderTerms.orderDate.Issue = '2017-15-21'");
 //console.log('\n------\n');
 //parse('poNumber = "123" OR poNumber = "456"');
 //console.log('\n------\n');
