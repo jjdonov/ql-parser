@@ -13,7 +13,7 @@ describe('Scanner', () => {
   });
 
   it('does something with quoted date', () => {
-    const scanner = new Scanner('\'2017-12-25\'');
+    const scanner = new Scanner("'2017-12-25'");
     const tokens = scanner.scan();
     expect(tokens.length).to.equal(2);
     const dateToken = tokens.shift();

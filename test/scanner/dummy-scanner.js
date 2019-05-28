@@ -1,4 +1,4 @@
-module.exports = (source) => ({
+module.exports = source => ({
   source: source,
   start: 0,
   current: 1,
@@ -14,7 +14,6 @@ module.exports = (source) => ({
     return this.source.charAt(this.current - 1);
   },
   addToken: function(type, text) {
-    this.tokens.push({type, text});
+    this.tokens.push({ type, text });
   }
 });
-

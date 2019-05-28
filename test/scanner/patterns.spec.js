@@ -2,7 +2,6 @@ const patterns = require('../../src/scanner/patterns');
 const expect = require('chai').expect;
 
 describe('patterns', () => {
-
   describe('isWhiteSpace', () => {
     it('rejects non-whitespace single character', () => {
       expect(patterns.isWhiteSpace('h')).to.equal(false);
@@ -28,7 +27,6 @@ describe('patterns', () => {
     it('rejects non-alpha single character', () => {
       expect(patterns.isAlpha('1')).to.equal(false);
       expect(patterns.isAlpha('!')).to.equal(false);
-
     });
     it('rejects non-alpha multicharacter', () => {
       expect(patterns.isAlpha('!?123')).to.equal(false);
@@ -53,7 +51,7 @@ describe('patterns', () => {
       expect(patterns.isAlphaNumeric('&')).to.equal(false);
     });
     it('rejects non-alphaNumeric multicharacter', () => {
-      expect(patterns.isAlphaNumeric('%$\'')).to.equal(false);
+      expect(patterns.isAlphaNumeric("%$'")).to.equal(false);
     });
     it('accepts single alphaNumeric character', () => {
       expect(patterns.isAlphaNumeric('a')).to.equal(true);
@@ -130,5 +128,4 @@ describe('patterns', () => {
   describe('isDateTimeWithTimeZone', () => {
     it('rejects datetime without tz');
   });
-
 });
