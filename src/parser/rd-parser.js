@@ -4,7 +4,7 @@ const {
   createNegatedCondition,
   createOrCondition,
   createAndCondition
-} = require('../condition/condition-factory');
+} = require('./condition/condition-factory');
 
 const query = controller => {
   const q = orCondition(controller);
