@@ -50,30 +50,13 @@ function parse(input) {
   }
 }
 
-parse("orderTerms.orderDate.Issue = '2017-15-21'");
+const exampleQueries = [
+  "orderTerms.orderDate.Issue = '2017-15-21'",
+  'poNumber = "123"',
+  'poNumber = "123" OR poNumber = "456"',
+  'poNumber = "123" AND poNumber = "456"',
+  'poNumber != "123"',
+  'poNumber STARTS WITH "123"'
+];
 
-//function err() {}
-//
-//function scan(input) {
-//  return new Scanner(input).scan();
-//}
-
-//console.log(`Results
-//           ${scan('poNumber = "12345"')}
-//           ${scan('OrderTerms.orderDate.Issue IN @(LAST 30 DAYS)')}
-//            ** PARSE **
-//           ${parse('poNumber = "123"')}`);
-
-//parse('poNumber = "123"');
-//console.log('\n------\n');
-//parse('poNumber = "123" OR poNumber = "456"');
-//console.log('\n------\n');
-//parse('poNumber = "123" AND poNumber = "456"');
-//console.log('\n------\n');
-//parse('poNumber != "123"');
-//console.log('\n------\n');
-//parse('!poNumber = "123"');
-//console.log('\n------\n');
-//parse('!!poNumber = "123"');
-//console.log('\n------\n');
-//parse('poNumber STARTS WITH "123"');
+exampleQueries.forEach(query => parse(query));
