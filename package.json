@@ -1,7 +1,7 @@
 {
-  "name": "oql-parser",
+  "name": "ql-parser",
   "version": "1.0.0",
-  "description": "OQL (Object Query Language) Parser Implementation",
+  "description": "QL (Query Language) Parser Implementation",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec --recursive"

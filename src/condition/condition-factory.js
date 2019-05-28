@@ -1,9 +1,9 @@
-const OqlCondition = {
+const QlCondition = {
   type: null,
 };
 
 function makeCondition(source) {
-  return Object.assign(Object.create(OqlCondition), source);
+  return Object.assign(Object.create(QlCondition), source);
 }
 
 module.exports.createSimpleCondition =

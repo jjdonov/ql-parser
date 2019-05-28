@@ -1,7 +1,7 @@
 
 /**
  * It would have been nice to use _.get (lodash)
- * or similar. But the paths oql uses are not real
+ * or similar. But the paths ql uses are not real
  * js paths.
  *
  * That makes sense--if you are querying for an object

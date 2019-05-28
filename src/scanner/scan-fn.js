@@ -75,7 +75,6 @@ module.exports = (scanner) => {
         } else if (isAlpha(c)) {
           scanner.identifier();
         } else {
-          //err();
           throw new Error(`Unknown token: ${c}
                           Tokens consumed so far: ${scanner.tokens}`);
         }
