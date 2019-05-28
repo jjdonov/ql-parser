@@ -1,10 +1,8 @@
-const {TOKEN_TYPES, KEYWORDS} = require('../token/token-types.js');
 const Token = require('../token/token.js');
 const Consumer = require('./consumer');
 const doScan = require('./scan-fn');
 
 module.exports = class Scanner {
-
   constructor(source) {
     this.source = source;
     this.start = 0;
@@ -25,10 +23,10 @@ module.exports = class Scanner {
   }
 
   match(expectedChar) {
-    if(this.isAtEnd()) {
+    if (this.isAtEnd()) {
       return false;
     }
-    if(this.peek() !== expectedChar) {
+    if (this.peek() !== expectedChar) {
       return false;
     }
     this.current++;
@@ -36,7 +34,7 @@ module.exports = class Scanner {
   }
 
   peek(distance = 0) {
-    if(this.isAtEnd()) {
+    if (this.isAtEnd()) {
       return '\0';
     }
     return this.source.substr(this.current, 1 + distance);
@@ -47,13 +45,18 @@ module.exports = class Scanner {
   }
 
   addToken(type, literal) {
-    const token = new Token(type, this.currentText(), literal, this.line, this.current);
+    const token = new Token(
+      type,
+      this.currentText(),
+      literal,
+      this.line,
+      this.current
+    );
     this.tokens.push(token);
   }
 
   scan() {
-     doScan(this);
-     return this.tokens;
+    doScan(this);
+    return this.tokens;
   }
-
 };

@@ -1,34 +1,35 @@
 const QlCondition = {
-  type: null,
+  type: null
 };
 
 function makeCondition(source) {
   return Object.assign(Object.create(QlCondition), source);
 }
 
-module.exports.createSimpleCondition =
-    (lhs, operator, rhs) =>
-    makeCondition({
-      type: 'simple',
-      lhs,
-      operator,
-      rhs});
-
-module.exports.createNegatedCondition =
-  (condition) =>
+module.exports.createSimpleCondition = (lhs, operator, rhs) =>
   makeCondition({
-    type: 'negation', condition});
+    type: 'simple',
+    lhs,
+    operator,
+    rhs
+  });
 
-module.exports.createOrCondition =
-  (lCondition, rCondition) =>
+module.exports.createNegatedCondition = condition =>
+  makeCondition({
+    type: 'negation',
+    condition
+  });
+
+module.exports.createOrCondition = (lCondition, rCondition) =>
   makeCondition({
     type: 'or',
     lCondition,
-    rCondition});
+    rCondition
+  });
 
-module.exports.createAndCondition =
-  (lCondition, rCondition) =>
+module.exports.createAndCondition = (lCondition, rCondition) =>
   makeCondition({
     type: 'and',
     lCondition,
-    rCondition});
+    rCondition
+  });

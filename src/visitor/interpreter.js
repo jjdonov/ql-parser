@@ -1,24 +1,29 @@
-//interpreter
 const visit = require('./visitor');
-//const ObjectPath = require('../object-path/object-path.js');
 const Predicates = require('../interpreter/predicates');
 
 const Interpreter = {
-  and: (node) => {
-    throw new Error('unimplemented.');
+  and: node => {
+    throw new Error(
+      `AND is unimplemented, received node ${JSON.stringify(node)}`
+    );
   },
-  or: (node) => {
-    throw new Error('unimplemented.');
+  or: node => {
+    throw new Error(
+      `OR is unimplemented, received node ${JSON.stringify(node)}`
+    );
   },
-  negation: (node) => {
-    throw new Error('unimplemented.');
+  negation: node => {
+    throw new Error(
+      `NEGATION is unimplemented, received node ${JSON.stringify(node)}`
+    );
   },
-  simple: (node) => {
+  simple: node => {
+    //eslint-disable-next-line no-console
     console.log(`Evaluating:
                 ${JSON.stringify(node)}`);
-//    const accessor = ObjectPath.createAccessor(node.lhs.lexeme);
+    //    const accessor = ObjectPath.createAccessor(node.lhs.lexeme);
     let predicate;
-    switch(node.operator.type) {
+    switch (node.operator.type) {
       case 'EQ':
         predicate = Predicates.simplePredicate(node);
         break;
@@ -36,5 +41,5 @@ const Interpreter = {
 };
 
 module.exports = {
-  interpret: (node) => visit(Object.create(Interpreter), node)
+  interpret: node => visit(Object.create(Interpreter), node)
 };

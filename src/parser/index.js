@@ -1,14 +1,13 @@
 const controls = require('./controls');
-const {query} = require('./rd-parser');
+const { query } = require('./rd-parser');
 
 module.exports = class Parser {
-
   constructor(tokens) {
     this.tokens = tokens;
   }
 
   parse() {
-    if(!this.tokens || !this.tokens.length) {
+    if (!this.tokens || !this.tokens.length) {
       return;
     }
     const state = {
@@ -19,7 +18,8 @@ module.exports = class Parser {
     const controller = controls(state);
     try {
       return query(controller);
-    } catch(e) {
+    } catch (e) {
+      //eslint-disable-next-line no-console
       console.log(`
                   Exception occured while parsing.
                   state dump:
@@ -29,6 +29,4 @@ module.exports = class Parser {
       throw e;
     }
   }
-
 };
-

@@ -2,7 +2,6 @@
  *
  */
 module.exports = class Token {
-
   constructor(type, lexeme, literal, line, column) {
     this.type = type;
     this.lexeme = lexeme;
@@ -12,11 +11,8 @@ module.exports = class Token {
   }
 
   toString() {
-    return parenthesize(
-      [this.type, this.lexeme, this.literal].join(' ')
-    );
+    return parenthesize([this.type, this.lexeme, this.literal].join(' '));
   }
-
 };
 
-const parenthesize = (str) => `(${str})`;
+const parenthesize = str => `(${str})`;
