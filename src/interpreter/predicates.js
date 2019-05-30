@@ -12,6 +12,9 @@ const createPredicate = simpleCondition => {
   };
 };
 
+/*
+ * TODO implement _some_ simple type checking for operators
+ */
 const getEvaulator = node => {
   let predicate;
   switch (node.operator.type) {
@@ -23,6 +26,9 @@ const getEvaulator = node => {
       break;
     case 'GT':
       predicate = (a, b) => a > b;
+      break;
+    case 'STARTSWITH':
+      predicate = (a, b) => a.startsWith(b);
       break;
     default:
       throw new Error('UFO (Unidentifed Flying Operator) : ' + node.operator);

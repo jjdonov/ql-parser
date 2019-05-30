@@ -54,16 +54,13 @@ function parse(input) {
 }
 
 const exampleQueries = [
-  //"orderTerms.orderDate.Issue = '2017-15-21'",
-  //'poNumber = "123"',
-  //'(poNumber = "123")',
-  //'!(poNumber = "123")',
-  //'poNumber = "123" OR poNumber = "456"',
-  //'poNumber = "123" AND poNumber = "456"',
-  //'poNumber != "123"'
-  //
-  //this infix operator is failing in the scanner.
-  //it mistakes the value for an identifier
+  "orderTerms.orderDate.Issue = '2017-15-21'",
+  'poNumber = "123"',
+  '(poNumber = "123")',
+  '!(poNumber = "123")',
+  'poNumber = "123" OR poNumber = "456"',
+  'poNumber = "123" AND poNumber = "456"',
+  'poNumber != "123"',
   'poNumber STARTS WITH "123"'
 ];
 
