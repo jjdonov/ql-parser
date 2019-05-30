@@ -39,10 +39,10 @@ function parse(input) {
       }
     });
     console.log(`TOKENS ->
-                ${tokens}`);
+    ${tokens}`);
     const ast = new Parser(tokens).parse();
     console.log(`AST ->
-                ${ASTPrinter.interpret(ast)}`);
+    ${ASTPrinter.interpret(ast)}`);
     console.log('EVAL');
     const fun = PredicateGenerator.interpret(ast);
     const result = data.filter(fun);
@@ -61,7 +61,8 @@ const exampleQueries = [
   'poNumber = "123" OR poNumber = "456"',
   'poNumber = "123" AND poNumber = "456"',
   'poNumber != "123"',
-  'poNumber STARTS WITH "123"'
+  'poNumber STARTS WITH "123"',
+  '(poNumber = "123" OR poNumber="456") AND orderTerms.issueDate.Issue = "2017-15-21"'
 ];
 
 exampleQueries.forEach(query => parse(query));

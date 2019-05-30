@@ -1,7 +1,7 @@
 //Visitor
-const visit = (visitor, node) =>
+const visit = (visitor, node, params) =>
   visitor[node.type]
-    ? visitor[node.type].call(visitor, node)
+    ? visitor[node.type].call(visitor, node, params)
     : visitorErr(
         `visitor does not have ${node.type} defined. Has ${Object.keys(
           visitor
