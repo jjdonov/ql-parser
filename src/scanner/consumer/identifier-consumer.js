@@ -1,14 +1,3 @@
-/* eslint-disable */
-
-/**
- * consumeIdentifier is not currently used by the project. 
- * It will be needed to implement certain operators. 
- * Most notably String and Date operators.
- *
- * There are some obvious bugs below.
- * • current is undeclared
- * • addToken is undefined
- */
 const { isAlphaNumeric, isWhiteSpace } = require('../patterns');
 const { TOKEN_TYPES, KEYWORDS } = require('../../token/token-types.js');
 
@@ -25,11 +14,11 @@ module.exports = function consumeIdentifier() {
     while (isAlphaNumeric(this.peek())) {
       this.advance();
     }
-    const next = this.source.substring(nextStart, current);
+    const next = this.source.substring(nextStart, this.current);
     if (next.toUpperCase() === 'WITH') {
       const tokenType =
         text === 'STARTS' ? TOKEN_TYPES.STARTSWITH : TOKEN_TYPES.ENDSWITH;
-      addToken(tokenType);
+      this.addToken(tokenType);
       return;
     }
     throw new Error('Untermined ' + text + ' clause. Next was: ' + next);
