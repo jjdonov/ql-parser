@@ -4,26 +4,29 @@ const Scanner = require('../src/scanner');
 const Parser = require('../src/parser');
 const Interpreter = require('../src/visitor/interpreter.js');
 
-function parse(input) {
-  const data = [
-    {
-      poNumber: '123',
-      orderTerms: {
-        orderDate: {
-          Issue: '2017-15-21'
-        }
-      }
-    },
-    {
-      poNumber: '456',
-      orderTerms: {
-        orderDate: {
-          Issue: '2017-15-20'
-        }
+/**
+ * Sample data to run all the example queries against
+ */
+const data = [
+  {
+    poNumber: '123',
+    orderTerms: {
+      orderDate: {
+        Issue: '2017-15-21'
       }
     }
-  ];
+  },
+  {
+    poNumber: '456',
+    orderTerms: {
+      orderDate: {
+        Issue: '2017-15-20'
+      }
+    }
+  }
+];
 
+function parse(input) {
   try {
     console.log('--------------------');
     console.log(`Parsing input: ${input}`);
@@ -54,10 +57,10 @@ const exampleQueries = [
   "orderTerms.orderDate.Issue = '2017-15-21'",
   'poNumber = "123"',
   '(poNumber = "123")',
-  '!(poNumber = "123")'
-  //'poNumber = "123" OR poNumber = "456"',
-  //'poNumber = "123" AND poNumber = "456"',
-  //'poNumber != "123"',
+  '!(poNumber = "123")',
+  'poNumber = "123" OR poNumber = "456"',
+  'poNumber = "123" AND poNumber = "456"',
+  'poNumber != "123"'
   //'poNumber STARTS WITH "123"'
 ];
 

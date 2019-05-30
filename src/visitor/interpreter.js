@@ -3,14 +3,14 @@ const Predicates = require('../interpreter/predicates');
 
 const Interpreter = {
   and: node => {
-    throw new Error(
-      `AND is unimplemented, received node ${JSON.stringify(node)}`
-    );
+    const lPredicate = visit(Interpreter, node.lCondition);
+    const rPredicate = visit(Interpreter, node.rCondition);
+    return o => lPredicate(o) && rPredicate(o);
   },
   or: node => {
-    throw new Error(
-      `OR is unimplemented, received node ${JSON.stringify(node)}`
-    );
+    const lPredicate = visit(Interpreter, node.lCondition);
+    const rPredicate = visit(Interpreter, node.rCondition);
+    return o => lPredicate(o) || rPredicate(o);
   },
   negation: node => {
     const predicate = visit(Interpreter, node.condition);
