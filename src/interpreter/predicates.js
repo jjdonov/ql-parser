@@ -1,14 +1,33 @@
 const ObjectPath = require('../object-path/object-path');
 
-const simplePredicate = (module.exports.simplePredicate = simpleCondition => {
+const createPredicate = simpleCondition => {
   const accessor = ObjectPath.createAccessor(simpleCondition.lhs.lexeme);
+  const evaluate = getEvaulator(simpleCondition);
   return o => {
     const lhsVal = accessor(o);
     if (lhsVal.length > 1) {
       throw new Error('lhs val is not specific');
     }
-    return lhsVal[0] === simpleCondition.rhs.literal;
+    return evaluate(lhsVal[0], simpleCondition.rhs.literal);
   };
-});
+};
 
-module.exports.simplePredicate = simplePredicate;
+const getEvaulator = node => {
+  let predicate;
+  switch (node.operator.type) {
+    case 'EQ':
+      predicate = (a, b) => a === b;
+      break;
+    case 'BANGEQ':
+      predicate = (a, b) => a !== b;
+      break;
+    case 'GT':
+      predicate = (a, b) => a > b;
+      break;
+    default:
+      throw new Error('UFO (Unidentifed Flying Operator) : ' + node.operator);
+  }
+  return predicate;
+};
+
+module.exports.createPredicate = createPredicate;

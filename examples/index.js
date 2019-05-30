@@ -53,8 +53,8 @@ function parse(input) {
 const exampleQueries = [
   "orderTerms.orderDate.Issue = '2017-15-21'",
   'poNumber = "123"',
-  '(poNumber = "123")'
-  //'!(poNumber = "123")'
+  '(poNumber = "123")',
+  '!(poNumber = "123")'
   //'poNumber = "123" OR poNumber = "456"',
   //'poNumber = "123" AND poNumber = "456"',
   //'poNumber != "123"',

@@ -13,31 +13,10 @@ const Interpreter = {
     );
   },
   negation: node => {
-    throw new Error(
-      `NEGATION is unimplemented, received node ${JSON.stringify(node)}`
-    );
+    const predicate = visit(Interpreter, node.condition);
+    return o => !predicate(o);
   },
-  simple: node => {
-    //eslint-disable-next-line no-console
-    console.log(`Evaluating:
-                ${JSON.stringify(node)}`);
-    //    const accessor = ObjectPath.createAccessor(node.lhs.lexeme);
-    let predicate;
-    switch (node.operator.type) {
-      case 'EQ':
-        predicate = Predicates.simplePredicate(node);
-        break;
-      case 'BANGEQ':
-        predicate = (a, b) => a != b;
-        break;
-      case 'GT':
-        predicate = (a, b) => a > b;
-        break;
-      default:
-        throw new Error('UFO (Unidentifed Flying Operator) : ' + node.operator);
-    }
-    return predicate;
-  }
+  simple: node => Predicates.createPredicate(node)
 };
 
 module.exports = {
