@@ -1,4 +1,4 @@
-const visit = require('./visitor');
+const visit = require('../visitor');
 
 const ASTPrinter = {
   and: node => {
@@ -22,5 +22,5 @@ const ASTPrinter = {
 };
 
 module.exports = {
-  visit: node => visit(Object.create(ASTPrinter), node)
+  interpret: node => visit(Object.create(ASTPrinter), node)
 };

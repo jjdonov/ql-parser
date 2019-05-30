@@ -1,8 +1,8 @@
 /*eslint-disable no-console*/
-const ASTPrinter = require('../src/visitor/ast-printer.js');
 const Scanner = require('../src/scanner');
 const Parser = require('../src/parser');
-const Interpreter = require('../src/visitor/interpreter.js');
+const ASTPrinter = require('../src/interpreters/ast-printer');
+const PredicateGenerator = require('../src/interpreters/predicate-generator');
 
 /**
  * Sample data to run all the example queries against
@@ -42,9 +42,9 @@ function parse(input) {
                 ${tokens}`);
     const ast = new Parser(tokens).parse();
     console.log(`AST ->
-                ${ASTPrinter.visit(ast)}`);
+                ${ASTPrinter.interpret(ast)}`);
     console.log('EVAL');
-    const fun = Interpreter.interpret(ast);
+    const fun = PredicateGenerator.interpret(ast);
     const result = data.filter(fun);
     console.log(' Result: ' + JSON.stringify(result, null, 4));
   } catch (e) {

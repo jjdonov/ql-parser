@@ -1,4 +1,4 @@
-const ObjectPath = require('../object-path');
+const ObjectPath = require('../../object-path');
 
 const createPredicate = simpleCondition => {
   const accessor = ObjectPath.createAccessor(simpleCondition.lhs.lexeme);

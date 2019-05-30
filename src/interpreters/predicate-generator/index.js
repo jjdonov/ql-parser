@@ -1,5 +1,5 @@
-const visit = require('./visitor');
-const Predicates = require('../interpreter/predicates');
+const visit = require('../visitor');
+const Predicates = require('./predicates');
 
 const Interpreter = {
   and: node => {
