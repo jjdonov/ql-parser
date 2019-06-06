@@ -12,7 +12,7 @@ const data = [
     poNumber: '123',
     orderTerms: {
       orderDate: {
-        Issue: '2017-15-21'
+        Issue: new Date('2017-05-21')
       }
     }
   },
@@ -20,7 +20,7 @@ const data = [
     poNumber: '456',
     orderTerms: {
       orderDate: {
-        Issue: '2017-15-20'
+        Issue: '2017-05-20'
       }
     }
   }
@@ -54,7 +54,7 @@ function parse(input) {
 }
 
 const exampleQueries = [
-  "orderTerms.orderDate.Issue = '2017-15-21'",
+  "orderTerms.orderDate.Issue = '2017-05-21'",
   'poNumber = "123"',
   '(poNumber = "123")',
   '!(poNumber = "123")',

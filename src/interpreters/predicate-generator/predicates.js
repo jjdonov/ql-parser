@@ -12,14 +12,16 @@ const createPredicate = simpleCondition => {
   };
 };
 
-/*
- * TODO implement _some_ simple type checking for operators
- */
 const getEvaulator = node => {
   let predicate;
   switch (node.operator.type) {
     case 'EQ':
-      predicate = (a, b) => a === b;
+      predicate = (a, b) => {
+        if (node.rhs.type === 'DATE') {
+          return dateEquals(a, b);
+        }
+        return a === b;
+      };
       break;
     case 'BANGEQ':
       predicate = (a, b) => a !== b;
@@ -34,6 +36,20 @@ const getEvaulator = node => {
       throw new Error('UFO (Unidentifed Flying Operator) : ' + node.operator);
   }
   return predicate;
+};
+
+/**
+ * d1 is the date from the supplied data, and needs to be
+ * checked prior to invoking Date methods.
+ *
+ * d2 is the Date instance parsed from the supplied
+ * query string, and therefore will _always_ be a date.
+ */
+const dateEquals = (d1, d2) => {
+  if (!d1.getTime) {
+    return false;
+  }
+  return d1.getTime() === d2.getTime();
 };
 
 module.exports.createPredicate = createPredicate;

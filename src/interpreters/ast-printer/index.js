@@ -18,7 +18,12 @@ const ASTPrinter = {
     )})\n${visit(ASTPrinter, node.rCondition, newParams)}`;
   },
   negation: (node, params) => {
-    return `${indentation(params)}NOT (${visit(ASTPrinter, node.condition)})`;
+    const newParams = incrementDepth(params);
+    return `${indentation(params)}NOT\n${visit(
+      ASTPrinter,
+      node.condition,
+      newParams
+    )}`;
   },
   simple: (node, params) => {
     return `${indentation(params)}${node.operator} (${node.lhs}, ${node.rhs})`;
@@ -32,5 +37,5 @@ const incrementDepth = (params = { depth: -1 }) => ({
 });
 
 module.exports = {
-  interpret: node => visit(Object.create(ASTPrinter), node, incrementDepth())
+  interpret: node => visit(ASTPrinter, node, incrementDepth())
 };

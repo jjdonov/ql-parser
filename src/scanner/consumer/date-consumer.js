@@ -7,8 +7,5 @@ module.exports = function consumeDate(c) {
   this.advance();
   const day = this.advance(2);
   //TODO: validation should live in parser?
-  this.addToken(
-    TOKEN_TYPES.DATE,
-    [year, month, day].join('-') /*{year, month, day}*/
-  );
+  this.addToken(TOKEN_TYPES.DATE, new Date(`${year}-${month}-${day}`));
 };

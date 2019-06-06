@@ -54,6 +54,9 @@ module.exports = scanner => {
       case '\n':
         break;
       case "'":
+        //TODO: add tests for date.
+        //The lexeme contains the opening quote, but not
+        //the closing quote
         if (isDate(scanner.peek(9))) {
           scanner.date();
           let closingQuote = scanner.advance();
